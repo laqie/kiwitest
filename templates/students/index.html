@@ -12,6 +12,7 @@
     <td width="150">Группа</td>
     <td>Староста</td>
     <td>Кол-во человек</td>
+    <td>Управление</td>
 </tr>
 </thead>
 <tbody>
@@ -20,10 +21,15 @@
             <td><a href="{{ group.get_absolute_url }}">{{ group.title }}</a></td>
             <td>{{ group.head.get_name }}</td>
             <td>{{ group.students.count }}</td>
+            <td>
+                <a href="{{ group.get_edit_url }}">изменить</a> |
+                <a href="{{ group.get_delete_url }}">удалить</a>
+            </td>
         </tr>
     {% endfor %}
 </tbody>
 </table>
-
+<br>
+<a href="{% url add_group %}">Добавить группу</a> | <a href="{% url add_student %}">Добавить студента</a>
 </body>
 </html>

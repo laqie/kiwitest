@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if group_id %}Редактирование{% else %}Добавление{% endif %} группы</title>
+</head>
+<body>
+<a href="{% url index %}">В начало</a>
+<h1>{% if group_id %}Редактирование{% else %}Добавление{% endif %} группы</h1>
+<form action="{% if group_id %}{% url edit_group group_id %}{% else %}{% url add_group %}{% endif %}" method="POST">
+    {% csrf_token %}
+    <table rules="rows" cellpadding="10" style="text-align: left;">
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if student_id %}Редактирование{% else %}Добавление{% endif %} студента</title>
+</head>
+<body>
+<a href="{% url index %}">В начало</a>
+<h1>{% if student_id %}Редактирование{% else %}Добавление{% endif %} студента</h1>
+<form action="{% if student_id %}{% url edit_student student_id %}{% else %}{% url add_student %}{% endif %}" method="POST">
+    {% csrf_token %}
+    <table style="text-align: left;"  rules="rows" cellpadding="10">
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>
