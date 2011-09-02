@@ -5,6 +5,7 @@ def rel(*x):
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+COPYRIGHT = 'Alexander Popelnukhin <mail@laqie.net> (c) 2011'
 
 ADMINS = (
     ('Alexander Popelnukhin', 'mail@laqie.net'),
@@ -70,6 +71,12 @@ STATIC_URL = '/static/'
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+
+
+AUTHENTICATION_BACKENDS = (
+    'KiwiTest.auth_backends.EmailBackend',
+)
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -101,9 +108,18 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'KiwiTest.middlewares.SQLLogMiddleware',
 )
 
 ROOT_URLCONF = 'KiwiTest.urls'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'KiwiTest.context_processors.settings_processor',
+)
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

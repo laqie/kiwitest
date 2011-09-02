@@ -1,6 +1,7 @@
 # -*-coding: utf-8-*-
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 
 from students.models import Group, Student
 from students.forms import StudentForm, GroupForm, YesNoForm
@@ -10,7 +11,9 @@ def index(request):
     groups = Group.objects.all()
 
     data = dict(groups=groups)
-    return render_to_response('students/index.html', data)
+    return render_to_response('students/index.html',
+                              data,
+                              context_instance=RequestContext(request))
 
 
 def group(request, group_id):
@@ -19,10 +22,13 @@ def group(request, group_id):
     students = group.students.all()
 
     data = dict(group=group, students=students)
-    return render_to_response('students/group.html', data)
+    return render_to_response('students/group.html',
+                              data,
+                              context_instance=RequestContext(request))
 
 
-def add_student(request, student_id=None, group_id=None):
+@login_required(login_url='/login/')
+def manage_student(request, student_id=None, group_id=None):
 
     if student_id:
         student = get_object_or_404(Student, pk=student_id)
@@ -56,7 +62,9 @@ def add_student(request, student_id=None, group_id=None):
                               data,
                               context_instance=RequestContext(request))
 
-def add_group(request, group_id=None):
+
+@login_required(login_url='/login/')
+def manage_group(request, group_id=None):
 
     if group_id:
         group = get_object_or_404(Group, pk=group_id)
@@ -82,6 +90,8 @@ def add_group(request, group_id=None):
                               data,
                               context_instance=RequestContext(request))
 
+
+@login_required(login_url='/login/')
 def delete_instance(request, instance_id, instance_type):
     if instance_type == 1:
         instance = get_object_or_404(Student, pk=instance_id)

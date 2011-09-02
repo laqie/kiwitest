@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Группа {{ group.title }}</title>
-</head>
-<body>
+{% extends '_base.html' %}
+{% load students_tags %}
+
+{% block title %}Группа {{ group.title }}{% endblock %}
+
+{% block content %}
     <a href="{% url index %}">В начало</a>
     <h1>Группа {{ group.title }}</h1>
 
@@ -28,12 +28,12 @@
                 <td>{{ student.birthday|date:"d.m.Y" }} г.</td>
                 <td>
                     <a href="{{ student.get_edit_url }}">изменить</a> | 
-                    <a href="{{ student.get_delete_url }}">удалить</a>
+                    <a href="{{ student.get_delete_url }}">удалить</a> |
+                    {% edit_list student 'в админке' %}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <a href="{% url add_student_to_group group_id=group.pk %}">Добавить студента</a>
-</body>
-</html>
+{% endblock %}

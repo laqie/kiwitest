@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Удаление {% if instance_type == 1 %}студента{% else %}группы{% endif %}</title>
-</head>
-<body>
-<a href="{% url index %}">В начало</a>
-<h1>Удаление  {% if instance_type == 1 %}студента{% else %}группы{% endif %} [ {{ instance }} ]</h1>
-<form method="POST" action="{% if instance_type == 1 %}{% url delete_student instance_id=instance_id %}{% else %}{% url delete_group instance_id=instance_id %}{% endif %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Подтвердить">
-</form>
+{% extends '_base.html' %}
 
+{% block title %}Удаление
+    {% if instance_type == 1 %}
+        студента
+    {% else %}
+        группы
+    {% endif %}
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+    <a href="{% url index %}">В начало</a>
+    <h1>Удаление  {% if instance_type == 1 %}студента{% else %}группы{% endif %} [ {{ instance }} ]</h1>
+    <form method="POST" action="{% if instance_type == 1 %}{% url delete_student instance_id=instance_id %}{% else %}{% url delete_group instance_id=instance_id %}{% endif %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Подтвердить">
+    </form>
+{% endblock %}

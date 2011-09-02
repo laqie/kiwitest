@@ -28,7 +28,11 @@ class Student(models.Model):
 
 class Group(models.Model):
     title = models.CharField(verbose_name=u'Название', max_length=200)
-    head = models.ForeignKey('students.Student', verbose_name=u'Староста', blank=True, null=True, on_delete=models.SET_NULL)
+    head = models.ForeignKey('students.Student',
+                             verbose_name=u'Староста',
+                             blank=True,
+                             null=True,
+                             on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return self.title

@@ -1,35 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Группы студентов</title>
-</head>
-<body>
-<h1>Группы студентов</h1>
+{% extends '_base.html' %}
+{% load students_tags %}
 
-<table border="0" rules="all" cellpadding="10" cellspacing="0" width="600">
-<thead>
-<tr style="font-weight: bold;">
-    <td width="150">Группа</td>
-    <td>Староста</td>
-    <td>Кол-во человек</td>
-    <td>Управление</td>
-</tr>
-</thead>
-<tbody>
-    {% for group in groups %}
-        <tr>
-            <td><a href="{{ group.get_absolute_url }}">{{ group.title }}</a></td>
-            <td>{{ group.head.get_name }}</td>
-            <td>{{ group.students.count }}</td>
-            <td>
-                <a href="{{ group.get_edit_url }}">изменить</a> |
-                <a href="{{ group.get_delete_url }}">удалить</a>
-            </td>
-        </tr>
-    {% endfor %}
-</tbody>
-</table>
-<br>
-<a href="{% url add_group %}">Добавить группу</a> | <a href="{% url add_student %}">Добавить студента</a>
-</body>
-</html>
+{% block title %}Группы студентов{% endblock %}
+
+
+
+{% block content %}
+    <h1>Группы студентов</h1>
+
+    <table border="0" rules="all" cellpadding="10" cellspacing="0" width="700">
+    <thead>
+    <tr style="font-weight: bold;">
+        <td width="150">Группа</td>
+        <td>Староста</td>
+        <td>Кол-во человек</td>
+        <td>Управление</td>
+    </tr>
+    </thead>
+    <tbody>
+        {% for group in groups %}
+            <tr>
+                <td><a href="{{ group.get_absolute_url }}">{{ group.title }}</a></td>
+                <td>{{ group.head.get_name }}</td>
+                <td>{{ group.students.count }}</td>
+                <td>
+                    <a href="{{ group.get_edit_url }}">изменить</a> |
+                    <a href="{{ group.get_delete_url }}">удалить</a> |
+                    {% edit_list group 'в админке' %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <br>
+    <a href="{% url add_group %}">Добавить группу</a> | <a href="{% url add_student %}">Добавить студента</a>
+{% endblock %}
