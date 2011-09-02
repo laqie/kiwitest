@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Группа {{ group.title }}</title>
+</head>
+<body>
+    <a href="{% url index %}">В начало</a>
+    <h1>Группа {{ group.title }}</h1>
+
+    <table border="0" rules="all" cellpadding="10" cellspacing="0" width="800">
+        <thead>
+            <tr style="font-weight: bold;">
+                <td>№ зачетки</td>
+                <td>Фамилия</td>
+                <td>Имя</td>
+                <td>Отчество</td>
+                <td>Дата рождения</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr {% ifequal student group.head %}style="font-weight: bold;"{% endifequal %} >
+                <td>{{ student.student_ID }}</td>
+                <td>{{ student.surname }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.patronymic }}</td>
+                <td>{{ student.birthday|date:"d.m.Y" }} г.</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+
+    </table>
+</body>
+</html>

@@ -6,7 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'KiwiTest.views.home', name='home'),
+    url(r'^$', 'KiwiTest.students.views.index', name='index'),
+    url(r'^group/(\d+)/$', 'KiwiTest.students.views.group', name='show_group'),
     # url(r'^KiwiTest/', include('KiwiTest.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

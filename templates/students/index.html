@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Группы студентов</title>
+</head>
+<body>
+<h1>Группы студентов</h1>
+
+<table border="0" rules="all" cellpadding="10" cellspacing="0" width="600">
+<thead>
+<tr style="font-weight: bold;">
+    <td width="150">Группа</td>
+    <td>Староста</td>
+    <td>Кол-во человек</td>
+</tr>
+</thead>
+<tbody>
+    {% for group in groups %}
+        <tr>
+            <td><a href="{{ group.get_absolute_url }}">{{ group.title }}</a></td>
+            <td>{{ group.head.get_name }}</td>
+            <td>{{ group.students.count }}</td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+</body>
+</html>
