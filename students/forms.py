@@ -1,6 +1,6 @@
 #!-*-coding: utf-8-*-
 from django.forms import ModelForm, DateField, BooleanField, Form, RadioSelect
-from students.models import Student, Group
+from KiwiTest.students.models import Student, Group
 
 class StudentForm(ModelForm):
     birthday = DateField(help_text=u'Например: 1687-03-24', label=u'Дата рождения')

@@ -5,21 +5,21 @@
 </head>
 <body>
 
-{% block auth %}
-    {% if user %}
-        {% if user.is_authenticated %}
-            <p>Вы вошли как {{ user }}, <a href="/logout/">выйти</a></p>
-        {% else %}
-            <p>Вы не авторизованы, <a href="/login/">войти</a></p>
+    {% block auth %}
+        {% if user %}
+            {% if user.is_authenticated %}
+                <p>Вы вошли как {{ user }}, <a href="/logout/">выйти</a></p>
+            {% else %}
+                <p>Вы не авторизованы, <a href="/login/">войти</a></p>
+            {% endif %}
         {% endif %}
-    {% endif %}
-{% endblock %}
+    {% endblock %}
 
-{% block content %}content{% endblock %}
+    {% block content %}content{% endblock %}
 
-{% block footer %}
-    <p>Copyright: {{ settings.COPYRIGHT }}</p>
-{% endblock %}
+    {% block footer %}
+        <p>Copyright: {{ settings.COPYRIGHT }}</p>
+    {% endblock %}
 
 </body>
 </html>

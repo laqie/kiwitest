@@ -2,14 +2,13 @@
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
-from students.models import Group, Student
-from students.forms import StudentForm, GroupForm, YesNoForm
+from KiwiTest.students.models import Group, Student
+from KiwiTest.students.forms import StudentForm, GroupForm, YesNoForm
 
 def index(request):
-    
     groups = Group.objects.all()
-
     data = dict(groups=groups)
     return render_to_response('students/index.html',
                               data,
@@ -17,10 +16,8 @@ def index(request):
 
 
 def group(request, group_id):
-
     group = get_object_or_404(Group, pk=group_id)
     students = group.students.all()
-
     data = dict(group=group, students=students)
     return render_to_response('students/group.html',
                               data,
@@ -29,7 +26,6 @@ def group(request, group_id):
 
 @login_required(login_url='/login/')
 def manage_student(request, student_id=None, group_id=None):
-
     if student_id:
         student = get_object_or_404(Student, pk=student_id)
     else:
@@ -95,20 +91,21 @@ def manage_group(request, group_id=None):
 def delete_instance(request, instance_id, instance_type):
     if instance_type == 1:
         instance = get_object_or_404(Student, pk=instance_id)
-    else:
+    elif instance_type == 2:
         instance = get_object_or_404(Group, pk=instance_id)
-
-
+    else:
+        raise Http404
 
     if request.method == 'POST':
         form = YesNoForm(request.POST)
         if form.is_valid():
             choice = form.cleaned_data['choice']
-            if choice == True:
+            if choice:
                 instance.delete()
-        return redirect('index')
+            return redirect('index')
     else:
         form = YesNoForm()
+        
     data = dict(form=form, instance_id=instance_id, instance=instance, instance_type=instance_type)
     return render_to_response('students/delete_instance.html',
                               data,

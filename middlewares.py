@@ -1,7 +1,7 @@
 #!-*- coding: utf-8 -*-
 from django.db import connection
 from django.template import Template, Context
-from django.utils.encoding import smart_unicode
+
 
 class SQLLogMiddleware:
 
@@ -27,7 +27,6 @@ class SQLLogMiddleware:
 
         body = '</body>'
         body_position = content.find(body)
-
         content = content[:body_position] + renderred_template + content[body_position:]
         
         response.content = content.encode('utf-8')
