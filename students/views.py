@@ -4,8 +4,8 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
-from KiwiTest.students.models import Group, Student
-from KiwiTest.students.forms import StudentForm, GroupForm, YesNoForm
+from kiwitest.students.models import Group, Student
+from kiwitest.students.forms import StudentForm, GroupForm, YesNoForm
 
 def index(request):
     groups = Group.objects.all()

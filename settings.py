@@ -74,7 +74,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 
 AUTHENTICATION_BACKENDS = (
-    'KiwiTest.auth_backends.EmailBackend',
+    'kiwitest.auth_backends.EmailBackend',
 )
 
 # Additional locations of static files
@@ -108,17 +108,17 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'KiwiTest.middlewares.SQLLogMiddleware',
+    'kiwitest.middlewares.SQLLogMiddleware',
 )
 
-ROOT_URLCONF = 'KiwiTest.urls'
+ROOT_URLCONF = 'kiwitest.urls'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
-    'KiwiTest.context_processors.settings_processor',
+    'kiwitest.context_processors.settings_processor',
 )
 
 TEMPLATE_DIRS = (
@@ -139,7 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'KiwiTest.students',
+    'kiwitest.students',
 )
 
 # A sample logging configuration. The only tangible logging

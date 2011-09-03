@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 
-urlpatterns = patterns( 'KiwiTest.students.views',
+urlpatterns = patterns('kiwitest.students.views',
     url(r'^$', 'index', name='index'),
     url(r'^group/(\d+)/$', 'group', name='show_group'),
 

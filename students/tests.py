@@ -8,7 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from django.test import Client
 from django.contrib.auth.models import User
-from KiwiTest.students.models import Group, Student
+from kiwitest.students.models import Group, Student
 
 class AddRemoveObjects(TestCase):
 

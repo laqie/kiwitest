@@ -6,7 +6,7 @@
 {% block auth %}{% endblock %}
 
 {% block content %}
-    <a href="{% url 'KiwiTest.students.views.index' %}">В начало</a>
+    <a href="{% url 'kiwitest.students.views.index' %}">В начало</a>
     <h1>Вход</h1>
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>

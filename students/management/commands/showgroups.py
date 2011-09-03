@@ -5,7 +5,7 @@ class Command(BaseCommand):
     help = "Show groups and count students in it"
 
     def handle(self, *args, **options):
-        from KiwiTest.students.models import Group
+        from kiwitest.students.models import Group
         groups = Group.objects.all()
 
         for group in groups:

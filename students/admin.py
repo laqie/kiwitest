@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from KiwiTest.students.models import Student, Group, Log
+from kiwitest.students.models import Student, Group, Log
 
 class StudentInline(admin.TabularInline):
     model = Student
