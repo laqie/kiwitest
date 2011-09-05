@@ -85,17 +85,18 @@ class Log(models.Model):
 def model_save_signal(sender, instance, signal, *args, **kwargs):
     h = Log()
     h.model = str(sender)
-    h.log = 'Object <%s> with ID <%d> ' % (instance, instance.pk)
+
 
     try:
         sender.objects.get(pk=instance.pk)
         h.type = 'M'
-        h.log += 'modified'
+        h.log = 'modified'
 
     except sender.DoesNotExist:
         h.type = 'C'
-        h.log += 'created'
-        
+        h.log = 'created'
+
+    h.log = 'Object <%s> ' % instance + h.log
     h.save()
 
 
@@ -105,6 +106,6 @@ def model_delete_signal(sender, instance, signal, *args, **kwargs):
     h = Log()
     h.model = str(sender)
     h.type = 'D'
-    h.log = 'Object <%s> with ID <%d> was deleted' % (instance, instance.pk)
+    h.log = 'Object <%s> was deleted' % instance
     h.save()
 
